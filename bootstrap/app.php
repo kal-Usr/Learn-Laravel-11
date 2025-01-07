@@ -11,14 +11,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->validateCsrfTokens(except: [
-            '*'
-        ]);
-
+        // $middleware->validateCsrfTokens(except: [
+        //     '*'
+        // ]);
+        
         $middleware->alias([
-            'isMember' => \App\Http\Middleware\CheckMembership::class,
-            'isAuth'   => \App\Http\Middleware\Auth::class,
+            'isAuth'   => App\Http\Middleware\Auth::class,
+            'isMember' => App\Http\Middleware\CheckMembership::class,
         ]);
+      
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

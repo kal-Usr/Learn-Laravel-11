@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+
 class Auth
 {
     /**
@@ -19,7 +20,7 @@ class Auth
         if(! $request->authenticated) {
             return redirect('/login');
         }
-
+        
         return $next($request);
     }
 }

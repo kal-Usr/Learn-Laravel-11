@@ -1,41 +1,29 @@
 <?php
 
-use App\Http\Controllers\MovieController;
+
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Http\Controllers\PostsController;
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-$movies = [];
-
 Route::group([
-    // 'prefix'     => 'movie',
-    'as'         => 'movie.'
-], function () use ($movies) {
+    'prefix' => 'posts',
+    'as' => 'posts.',
+], function () {
+    
+    Route::get('/', [PostsController::class, 'index'])->name('index');
 
-    Route::get('/movie', [MovieController::class, 'index']);
+    Route::get('/profile', [PostsController::class, 'profile'])->name('profile');
 
-    Route::get('/movie/{id}', [MovieController::class, 'show']);
+    Route::get('/create', [PostsController::class, 'create'])->name('posts.create');
 
-    Route::post('/movie',[MovieController::class, 'store']);
+    Route::post('/store', [PostsController::class, 'store'])->name('posts.store');
 
-    Route::put('/movie/{id}', [MovieController::class, 'update']);
+    Route::get('/{id}', [PostsController::class, 'show'])->name('posts.show');
 
-    Route::patch('/movie/{id}',[MovieController::class, 'update']);
-
-    Route::delete('/movie/{id}', [MovieController::class, 'destroy']);
-
-      
 });
 
-
-
-Route::get('/pricing-member', function () {
-  return 'Silahkan bergabung member untuk bisa mengakses';
-});
-
-Route::get('/login', function () {
-  return 'Login Page';
-})->name('login');

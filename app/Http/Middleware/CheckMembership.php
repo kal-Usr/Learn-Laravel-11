@@ -20,20 +20,21 @@ class CheckMembership
             return redirect('/pricing-member');
         }
 
-        Log::info('Before Request: ', [
-            'url' => $request->url(),
+        Log::info('Before Request:', [
+            'url'    => $request->url(),
             'params' => $request->all(),
         ]);
-
+   
         $response = $next($request);
 
         sleep(2);
 
-        Log::info('After Request:', [
-            'status' => $response->getStatusCode(),
+        Log::info('After Request: ', [
+            'status'  => $response->getStatusCode(),
             'content' => $response->getContent(),
         ]);
 
         return $response;
+
     }
 }
